@@ -15,9 +15,10 @@
                 <el-option v-for="(item,index) in typeOptions" :key="index" :label="item.title" :value="item._id">
                 </el-option>
             </el-select>
+            <!-- 选择书籍后，下面出现书籍的详情框 -->
             <div class="book-item clearfix" v-if="getBookItem[0]">
                 <div class="img-wrap">
-                    <img :src="getBookItem[0].img" alt="">
+                    <img :src="getBookItem[0].img">
                 </div>
                 <div class="book-desc">
                     <div class="title">
@@ -73,8 +74,8 @@ export default {
     formData:{
         title:"",
         img:"",
-        index:"",
-        book:"",
+        index:"",  //书籍排序
+        book:"",  //书籍的id
         categoryId:""//分类id
     },
     bookCount:1,
@@ -93,6 +94,7 @@ export default {
         this.typeOptions = res.data;        
         })
     },
+    //得到某条分类下的书籍
     async getBookData(){
         const res = await this.$axios.get(`/category/${this.formData.categoryId}/books`,{pn:this.page,size:5})
             this.bookData = res.data.books
@@ -106,19 +108,19 @@ export default {
         this.formData.book = id 
         this.isShowDialog=false
     },
-     pageChange(page){
-    //   console.log(page)
-      this.page = page
-      this.getBookData();
-    },
-     addSwiper(){
-         let isCanSubmit = true
-           for(var key in this.formData){
-               if(!this.formData[key]){
-                   isCanSubmit = false
-               }
-           }
-         if(isCanSubmit){
+    pageChange(page){
+//   console.log(page)
+    this.page = page
+    this.getBookData();
+},
+    addSwiper(){
+        let isCanSubmit = true
+        for(var key in this.formData){
+            if(!this.formData[key]){
+                isCanSubmit = false
+            }
+        }
+        if(isCanSubmit){
             this.$axios.post(`/swiper`,this.formData).then(res=>{
                         if (res.code == 200) {
                             this.$message.success(res.msg);
@@ -127,24 +129,24 @@ export default {
                             this.$message.error(res.msg);
                         }
                     })
-         }else{
-             this.$message.error("缺少必要参数")
-         }
-        
-     }
- },
- created () {
-      this.getCategory()
- },
- computed:{
-     getBookItem(){
-         if (this.formData.book) {   //如果有值表示用户已经选择了一本书
-             return this.bookData.filter(item=> item._id == this.formData.book)             
-         }else{
-             return []
-         }
-     }
- }
+        }else{
+            this.$message.error("缺少必要参数")
+        }
+    
+    }
+},
+created () {
+    this.getCategory()
+},
+computed:{
+    getBookItem(){
+        if (this.formData.book) {   //如果有值表示用户已经选择了一本书
+            return this.bookData.filter(item=> item._id = this.formData.book)             
+        }else{
+            return []
+        }
+    }
+}
 }
 </script>
 <style scoped lang="scss">

@@ -42,25 +42,28 @@ const router = new Router({
       component:components.layout,
       redirect: "layout/index",
       meta:{
-        title:"首页" 
+        title:"首页",
+        requireAuth: true
       },
       children:[
         {
           path: "index",
-          component: components.index
+          component: components.index,
         },
         {
           path: "users",
           component: components.users,
           meta:{
-            title:"用户管理页"
+            title:"用户管理页",
+            requireAuth: true
         }
         },
         {
           path: "category",
           component: components.category,
           meta:{
-            title:"分类管理页"
+            title:"分类管理页",
+            requireAuth: true
               }     
         }, 
         {
@@ -68,14 +71,16 @@ const router = new Router({
           name: "editCategory",
           component: components.editCategory,
           meta: {
-            title: "编辑分类"
+            title: "编辑分类",
+            requireAuth: true
           }
         },
         {
           path:"bookList",
           component:components.bookList,
           meta: {
-            title: "图书列表"
+            title: "图书列表",
+            requireAuth: true
           }
         },
         {
@@ -83,14 +88,16 @@ const router = new Router({
           name: "editBook",
           component: components.editBook,
           meta: {
-            title: "编辑图书"
+            title: "编辑图书",
+            requireAuth: true
           }
         },
         {
           path: "addBook",
           component: components.addBook,
           meta: {
-            title: "添加图书"
+            title: "添加图书",
+            requireAuth: true
           }
         },
         
@@ -99,7 +106,8 @@ const router = new Router({
           name: "addAdmin",
           component: components.addAdmin,
           meta: {
-            title: "添加管理员"
+            title: "添加管理员",
+            requireAuth: true
           }
         },
         {
@@ -107,7 +115,8 @@ const router = new Router({
           name: "userEdit",
           component: components.userEdit,
           meta: {
-            title: "修改个人信息"
+            title: "修改个人信息",
+            requireAuth: true
           }
         },
         {
@@ -115,7 +124,8 @@ const router = new Router({
           name: "addCategory",
           component: components.addCategory,
           meta: {
-            title: "添加分类"
+            title: "添加分类",
+            requireAuth: true
           }
         },
         {
@@ -123,7 +133,8 @@ const router = new Router({
           name: "swiperList",
           component: components.swiperList,
           meta: {
-            title: "轮播图列表"
+            title: "轮播图列表",
+            requireAuth: true
           }
         },
           {
@@ -131,7 +142,8 @@ const router = new Router({
             name: "addSwiper",
             component: components.addSwiper,
             meta: {
-              title: "添加轮播图"
+              title: "添加轮播图",
+              requireAuth: true
             }
           },
           {
@@ -139,7 +151,8 @@ const router = new Router({
             name: "swipeDetail",
             component: components.swipeDetail,
             meta: {
-              title: "轮播图详情"
+              title: "轮播图详情",
+              requireAuth: true
             }
           },
           {
@@ -147,7 +160,8 @@ const router = new Router({
             name: "editSwiper",
             component: components.editSwiper,
             meta: {
-              title: "修改轮播图"
+              title: "修改轮播图",
+              requireAuth: true
             }
           },
       ]
@@ -159,6 +173,8 @@ router.beforeEach((to, from, next) => {
   Nprogress.start()  
   if (to.meta && to.meta.title) {
     document.title = to.meta.title
+  }else{
+    document.title = "首页"
   }
   next()
 })

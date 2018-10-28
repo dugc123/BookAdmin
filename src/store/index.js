@@ -14,10 +14,7 @@ const store = new Vuex.Store({
         }
     },
     mutations: {
-       "CHANGE_USERINFO"(state,userinfo){
-            state.userinfo = userinfo
-        },
-        "GET_USERINFO"(state, userinfo) {
+       "CHANGE_USERINFO"(state,userinfo){  //保存用户信息
             state.userinfo = userinfo
         }
     },

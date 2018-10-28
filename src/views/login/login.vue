@@ -60,7 +60,6 @@ export default {
             console.log(res)
             if (res.code == 200) {
                 this.$store.commit("CHANGE_USERINFO",res.data)
-                this.$store.commit("GET_USERINFO",res.data)
                 this.$message.success('登录成功');
                 setTimeout(() => {
                 this.$router.push("/layout/index")                       

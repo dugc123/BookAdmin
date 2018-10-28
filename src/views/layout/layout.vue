@@ -26,7 +26,6 @@
                 <el-menu-item-group>
                 <template slot="title">用户管理</template>
                 <el-menu-item index="/layout/index">首页</el-menu-item>
-                <el-menu-item index="/login">登录页</el-menu-item>
                 <el-menu-item index="/layout/users">用户管理页</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
@@ -52,7 +51,7 @@
             </el-submenu>
             <el-submenu index="4">
                 <template slot="title">
-                <i class="el-icon-tickets"></i>
+                <i class="el-icon-picture"></i>
                 <span>轮播图管理</span>
                 </template>
                 <el-menu-item-group>
@@ -63,7 +62,7 @@
             <el-submenu index="5">
                 <template slot="title">
                 <i class="el-icon-setting"></i>
-                <span>后台管理</span>
+                <span>管理员管理</span>
                 </template>
                 <el-menu-item-group>
                 <el-menu-item index="/layout/addAdmin">添加管理员</el-menu-item>
@@ -100,9 +99,9 @@ export default {
                 }else if(click == 2){
                     this.$axios.get(`/logout`).then(res=>{
                         if (res.code == 200) {
-                            let payload = {userInfo: '', avatar: '', email: '', desc: ''}
+                            // let payload = {userInfo: '', avatar: '', email: '', desc: ''}
                             this.$message.success(res.msg)
-                            this.$store.commit('GET_USERINFO', payload)
+                            this.$store.commit('CHANGE_USERINFO', '')//清空store的内容
                             this.$router.push("/login")
                         }else {
                             this.$message.error(res.msg)
@@ -110,8 +109,6 @@ export default {
                     })
                 }
             }
-        },
-        computed:{
         },
         created () {
             this.initData()

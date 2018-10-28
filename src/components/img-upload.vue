@@ -33,7 +33,7 @@ export default {
       getToken(){
           this.$axios.get("http://upload.yaojunrong.com/getToken").then(res=>{
             //   console.log(res.data)
-              this.uploadData.token = res.data
+            this.uploadData.token = res.data
           })
       }
   },
